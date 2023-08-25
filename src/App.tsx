@@ -7,9 +7,12 @@ import Dashboard from './scenes/dashboard'
 import Layout from './scenes/layout'
 
 import {BrowserRouter , Routes , Route, Navigate } from "react-router-dom"
-import Owner from './scenes/owner'
-import Driver from './scenes/driver'
-import Complaint from './scenes/complaint'
+import Owner from './scenes/add-owner'
+import Driver from './scenes/add-driver'
+import Complaint from './scenes/add-complaint'
+import ViewComplaints from './scenes/view-complaints'
+import ViewDriver from './scenes/view-driver'
+import ViewVehicle from './scenes/view-vehicle'
 
 
 
@@ -29,12 +32,14 @@ function App() {
     <CssBaseline />
    <Routes>
       <Route element={<Layout />}>
-      <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
+      <Route path="/" element={<Navigate to="/viewdashboard" replace/>}/>
+      <Route path="/viewdashboard" element={<Dashboard/>}/>
       <Route path="/Owner" element={<Owner/>}/>
       <Route path="/Driver" element={<Driver/>}/>
       <Route path="/Complaint" element={<Complaint/>}/>
- 
+      <Route path="/ViewComplaints" element={<ViewComplaints/>}/>
+      <Route path="/ViewDrivers" element={<ViewDriver/>}/>
+      <Route path="/ViewVehicles" element={<ViewVehicle/>}/>
 
       </Route>
    </Routes>

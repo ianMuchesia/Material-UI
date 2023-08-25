@@ -33,6 +33,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import profileImage from '../assets/profile.png'
 import { User } from "../@types/types";
+import { ThemeOptions } from "../@types/pallette";
+import ListItemComponent from "../@core/list-items/ListItemComponent";
 interface Props {
 
     drawerWidth:string;
@@ -41,51 +43,10 @@ interface Props {
     setIsSideBarOpen:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const navItems = [
-    {
-      text: "Dashboard",
-      icon: <HomeOutlined />,
-    },
-    {
-      text: "Client Facing",
-      icon: null,
-    },
-    {
-      text: "Products",
-      icon: <ShoppingCartOutlined />,
-    },
-    {
-      text: "Customers",
-      icon: <Groups2Outlined />,
-    },
-    {
-      text: "Transactions",
-      icon: <ReceiptLongOutlined />,
-    },
-    {
-      text: "Geography",
-      icon: <PublicOutlined />,
-    },
-    {
-      text: "Create",
-      icon: null,
-    },
-    {
-      text: "Owner",
-      icon: <PointOfSaleOutlined />,
-    },
-    {
-      text: "Driver",
-      icon: <TodayOutlined />,
-    },
-    // {
-    //   text: "Vehicle",
-    //   icon: <CalendarMonthOutlined />,
-    // },
-    {
-      text: "Complaint",
-      icon: <PieChartOutlined />,
-    },
+const authItems = [
+   
+
+   
     {
       text: "Management",
       icon: null,
@@ -99,6 +60,48 @@ const navItems = [
       icon: <TrendingUpOutlined />,
     },
   ];
+
+  const createItems= [ {
+    text: "Create",
+    icon: null,
+  },
+  {
+    text: "Owner",
+    icon: <PointOfSaleOutlined />,
+  },
+  {
+    text: "Driver",
+    icon: <TodayOutlined />,
+  },
+  // {
+  //   text: "Vehicle",
+  //   icon: <CalendarMonthOutlined />,
+  // },
+  {
+    text: "Complaint",
+    icon: <PieChartOutlined />,
+  },];
+  const viewItems =[ {
+    text: "Dashboard",
+    icon: <HomeOutlined />,
+  },
+  {
+    text: "View",
+    icon: null,
+  },
+  {
+    text: "Drivers",
+    icon: <ShoppingCartOutlined />,
+  },
+  {
+    text: "Vehicles",
+    icon: <Groups2Outlined />,
+  },
+  {
+    text: "Complaints",
+    icon: <ReceiptLongOutlined />,
+  },];
+  
 const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Props) => {
 
     const {pathname } = useLocation();
@@ -107,7 +110,7 @@ const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Pr
 
     const navigate = useNavigate()
 
-    const theme:any = useTheme()
+    const theme = useTheme() as ThemeOptions;
 
     //everytime we have the pathname changing we are going to set the active value to the active page we are on
     useEffect(()=>{
@@ -150,52 +153,55 @@ const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Pr
                 )}
               </FlexBetween>
             </Box>
+            <Divider />
             <List>
-              {navItems.map(({ text, icon }) => {
+              {viewItems.map(({ text, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography variant="h3" key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
                       {text}
                     </Typography>
                   );
                 }
-                const lcText = text.toLowerCase();
+                const lcText = `view${text.toLowerCase()}`;
 
                 return (
-                  <ListItem key={text} disablePadding>
-                    <ListItemButton
-                      onClick={() => {
-                        navigate(`/${lcText}`);
-                        setActive(lcText);
-                      }}
-                      sx={{
-                        backgroundColor:
-                          active === lcText
-                            ? theme.palette.secondary[300]
-                            : "transparent",
-                        color:
-                          active === lcText
-                            ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          ml: "2rem",
-                          color:
-                            active === lcText
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
-                        }}
-                      >
-                        {icon}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                      {active === lcText && (
-                        <ChevronRightOutlined sx={{ ml: "auto" }} />
-                      )}
-                    </ListItemButton>
-                  </ListItem>
+                 <ListItemComponent  key={text} lcText={lcText} text={text} icon={icon} active={active} setActive={setActive}/>
+                );
+              })}
+            </List>
+          
+            <Divider />
+            <List>
+              {createItems.map(({ text, icon }) => {
+                if (!icon) {
+                  return (
+                    <Typography variant="h3" key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                      {text}
+                    </Typography>
+                  );
+                }
+                const lcText = `${text.toLowerCase()}`;
+
+                return (
+                 <ListItemComponent key={text} lcText={lcText} text={text} icon={icon} active={active} setActive={setActive}/>
+                );
+              })}
+            </List>
+            <Divider />
+            <List>
+              {authItems.map(({ text, icon }) => {
+                if (!icon) {
+                  return (
+                    <Typography variant="h3" key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                      {text}
+                    </Typography>
+                  );
+                }
+                const lcText = `${text.toLowerCase()}`;
+
+                return (
+                 <ListItemComponent key={text}  lcText={lcText} text={text} icon={icon} active={active} setActive={setActive}/>
                 );
               })}
             </List>
