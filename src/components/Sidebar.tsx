@@ -27,7 +27,13 @@ import {
   AdminPanelSettings,
   TrendingUpOutlined,
   PieChartOutlined,
-  AdminPanelSettingsOutlined 
+  AdminPanelSettingsOutlined, 
+  Queue,
+  GroupAdd,
+  PersonAddAlt,
+  CarRental,
+  DirectionsCar,
+  Announcement
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -67,11 +73,11 @@ const authItems = [
   },
   {
     text: "Owner",
-    icon: <PointOfSaleOutlined />,
+    icon: <GroupAdd/>,
   },
   {
     text: "Driver",
-    icon: <TodayOutlined />,
+    icon: <PersonAddAlt />,
   },
   // {
   //   text: "Vehicle",
@@ -79,7 +85,7 @@ const authItems = [
   // },
   {
     text: "Complaint",
-    icon: <PieChartOutlined />,
+    icon: <Queue />,
   },];
   const viewItems =[ {
     text: "Dashboard",
@@ -91,15 +97,15 @@ const authItems = [
   },
   {
     text: "Drivers",
-    icon: <ShoppingCartOutlined />,
+    icon: <CarRental />,
   },
   {
     text: "Vehicles",
-    icon: <Groups2Outlined />,
+    icon: <DirectionsCar />,
   },
   {
     text: "Complaints",
-    icon: <ReceiptLongOutlined />,
+    icon: <Announcement />,
   },];
   
 const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Props) => {
@@ -143,7 +149,7 @@ const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Pr
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
-                    ECOMVISION
+                    MOMBASA
                   </Typography>
                 </Box>
                 {!isNoneMobile && (
@@ -198,7 +204,7 @@ const Sidebar = ({drawerWidth, isSideBarOpen, setIsSideBarOpen, isNoneMobile}:Pr
                     </Typography>
                   );
                 }
-                const lcText = `${text.toLowerCase()}`;
+                const lcText = `/`;
 
                 return (
                  <ListItemComponent key={text}  lcText={lcText} text={text} icon={icon} active={active} setActive={setActive}/>
